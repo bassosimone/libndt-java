@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+ROOTDIR=$(cd $(dirname $0)/../ && pwd -P)
+cd $ROOTDIR
+CLASSPATH=build/classes/java/main:build/classes/java/test
+echo "java -Djava.library.path=`pwd` -cp $CLASSPATH -Xcheck:jni \"$1\""
+java -Djava.library.path=`pwd` -cp $CLASSPATH -Xcheck:jni "$1"

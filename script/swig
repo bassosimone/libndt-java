@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+cppdir=src/main/cpp
+javadir=src/main/java/io/ooni/libndt/java
+package=`echo $javadir | sed 's@/@.@g' | sed 's/src.main.java.//g'`
+swig -I/usr/local/include -c++ -java -package $package $cppdir/libndt-java.i
+rm -rf $javadir
+install -d $javadir
+mv $cppdir/*.java $javadir
