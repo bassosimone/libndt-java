@@ -4,7 +4,6 @@
 
 package io.ooni.libndt.api;
 
-// TODO(bassosimone): a prefix like `Swig` would probably be better.
 import io.ooni.libndt.swig.SwigClient;
 import io.ooni.libndt.swig.SwigSettings;
 
