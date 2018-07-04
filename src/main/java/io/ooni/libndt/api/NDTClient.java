@@ -45,6 +45,7 @@ public class NDTClient {
 
     public boolean run() {
         SwigSettings swigSettings = new SwigSettings();
+
         if (!settings_.mlabnsURL.isEmpty()) {
             swigSettings.setMlabnsUrl(settings_.mlabnsURL);
         }
@@ -76,6 +77,7 @@ public class NDTClient {
         if (settings_.verbosity > 0) {
             swigSettings.setVerbosity(settings_.verbosity);
         }
+
         MyClient myClient = new MyClient(this, swigSettings);
         boolean rv = myClient.run();
         myClient.detach();
