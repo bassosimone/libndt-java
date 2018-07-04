@@ -8,20 +8,20 @@
  * interface file instead.
  * ----------------------------------------------------------------------------- */
 
-#ifndef SWIG_NdtLibrary_WRAP_H_
-#define SWIG_NdtLibrary_WRAP_H_
+#ifndef SWIG_Libndt_WRAP_H_
+#define SWIG_Libndt_WRAP_H_
 
-class SwigDirector_NdtClient : public libndt::Client, public Swig::Director {
+class SwigDirector_SwigClient : public libndt::Client, public Swig::Director {
 
 public:
     void swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global);
-    SwigDirector_NdtClient(JNIEnv *jenv);
-    SwigDirector_NdtClient(JNIEnv *jenv, libndt::Settings settings);
-    virtual ~SwigDirector_NdtClient();
+    SwigDirector_SwigClient(JNIEnv *jenv);
+    SwigDirector_SwigClient(JNIEnv *jenv, libndt::Settings settings);
+    virtual ~SwigDirector_SwigClient();
     virtual void on_warning(std::string const &s);
     virtual void on_info(std::string const &s);
     virtual void on_debug(std::string const &s);
-    virtual void on_performance(uint8_t tid, uint8_t nflows, double measured_bytes, double measurement_interval, double elapsed, double max_runtime);
+    virtual void on_performance(libndt::NettestFlags tid, uint8_t nflows, double measured_bytes, double measurement_interval, double elapsed, double max_runtime);
     virtual void on_result(std::string scope, std::string name, std::string value);
     virtual void on_server_busy(std::string msg);
 public:

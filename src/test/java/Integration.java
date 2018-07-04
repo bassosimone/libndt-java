@@ -4,18 +4,18 @@
 
 package main;
 
-import io.ooni.libndt.java.NdtClient;
-import io.ooni.libndt.java.NdtLibrary;
-import io.ooni.libndt.java.NdtSettings;
+import io.ooni.libndt.api.NDTClient;
+import io.ooni.libndt.api.NDTConstants;
+import io.ooni.libndt.api.NDTSettings;
 
 class Integration {
-  static class WrapperClient extends NdtClient {
+  static class WrapperClient extends NDTClient {
 
     WrapperClient() {
       super();
     }
 
-    WrapperClient(NdtSettings s) {
+    WrapperClient(NDTSettings s) {
       super(s);
     }
 
@@ -38,17 +38,13 @@ class Integration {
   public static void main(String[] args) {
     // TODO(bassosimone): here we should probably ignore SIGPIPE!
     System.loadLibrary("ndt-java");
-    NdtSettings settings = new NdtSettings();
-    settings.setVerbosity(NdtLibrary.getVerbosityInfo());
-    settings.setNettestFlags(
-            (short)(NdtLibrary.getNettestFlagDownload() |
-            NdtLibrary.getNettestFlagUpload()));
-    settings.setProtocolFlags(
-            NdtLibrary.getProtocolFlagJson() |
-            NdtLibrary.getProtocolFlagTls());
-    settings.setHostname("ndt.iupui.mlab2.trn01.measurement-lab.org");
-    settings.addMetadata("client.application", "measurement-kit/libndt-java");
-    NdtClient client = new WrapperClient(settings);
+    NDTSettings settings = new NDTSettings();
+    settings.verbosity = NDTConstants.verbosityInfo;
+    settings.nettestFlags = (short)(NDTConstants.nettestFlagDownload | NDTConstants.nettestFlagUpload);
+    settings.protocolFlags = NDTConstants.protocolFlagJSON;
+    settings.hostname = "ndt.iupui.mlab2.trn01.measurement-lab.org";
+    settings.metadata.put("client.application", "measurement-kit/libndt-java");
+    NDTClient client = new WrapperClient(settings);
     client.run();
   }
 }

@@ -5,7 +5,7 @@
 /* SWIG interface file for libndt
    ============================== */
 
-%module(directors="1") NdtLibrary
+%module(directors="1") Libndt
 
 %{
 #include <libndt.hpp>
@@ -22,8 +22,8 @@
 
 %rename("%(lowercamelcase)s", %$isfunction) "";
 %rename("%(lowercamelcase)s", %$isvariable) "";
-%rename("NdtClient") "Client";
-%rename("NdtSettings") "Settings";
+%rename("SwigClient") "Client";
+%rename("SwigSettings") "Settings";
 
 /* Ignored symbols
    --------------- */

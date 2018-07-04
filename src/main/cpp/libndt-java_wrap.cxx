@@ -677,7 +677,7 @@ namespace Swig {
 
 namespace Swig {
   namespace {
-    jclass jclass_NdtLibraryJNI = NULL;
+    jclass jclass_LibndtJNI = NULL;
     jmethodID director_method_ids[6];
   }
 }
@@ -755,18 +755,18 @@ SWIGINTERN void libndt_Settings_add_metadata(libndt::Settings *self,std::string 
 
 #include "libndt-java_wrap.h"
 
-SwigDirector_NdtClient::SwigDirector_NdtClient(JNIEnv *jenv) : libndt::Client(), Swig::Director(jenv) {
+SwigDirector_SwigClient::SwigDirector_SwigClient(JNIEnv *jenv) : libndt::Client(), Swig::Director(jenv) {
 }
 
-SwigDirector_NdtClient::SwigDirector_NdtClient(JNIEnv *jenv, libndt::Settings settings) : libndt::Client(settings), Swig::Director(jenv) {
+SwigDirector_SwigClient::SwigDirector_SwigClient(JNIEnv *jenv, libndt::Settings settings) : libndt::Client(settings), Swig::Director(jenv) {
 }
 
-SwigDirector_NdtClient::~SwigDirector_NdtClient() {
+SwigDirector_SwigClient::~SwigDirector_SwigClient() {
   swig_disconnect_director_self("swigDirectorDisconnect");
 }
 
 
-void SwigDirector_NdtClient::on_warning(std::string const &s) {
+void SwigDirector_SwigClient::on_warning(std::string const &s) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -780,7 +780,7 @@ void SwigDirector_NdtClient::on_warning(std::string const &s) {
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     js = jenv->NewStringUTF((&s)->c_str());
     Swig::LocalRefGuard s_refguard(jenv, js); 
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[0], swigjobj, js);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[0], swigjobj, js);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -793,7 +793,7 @@ void SwigDirector_NdtClient::on_warning(std::string const &s) {
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::on_info(std::string const &s) {
+void SwigDirector_SwigClient::on_info(std::string const &s) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -807,7 +807,7 @@ void SwigDirector_NdtClient::on_info(std::string const &s) {
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     js = jenv->NewStringUTF((&s)->c_str());
     Swig::LocalRefGuard s_refguard(jenv, js); 
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[1], swigjobj, js);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[1], swigjobj, js);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -820,7 +820,7 @@ void SwigDirector_NdtClient::on_info(std::string const &s) {
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::on_debug(std::string const &s) {
+void SwigDirector_SwigClient::on_debug(std::string const &s) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -834,7 +834,7 @@ void SwigDirector_NdtClient::on_debug(std::string const &s) {
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     js = jenv->NewStringUTF((&s)->c_str());
     Swig::LocalRefGuard s_refguard(jenv, js); 
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[2], swigjobj, js);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[2], swigjobj, js);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -847,7 +847,7 @@ void SwigDirector_NdtClient::on_debug(std::string const &s) {
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::on_performance(uint8_t tid, uint8_t nflows, double measured_bytes, double measurement_interval, double elapsed, double max_runtime) {
+void SwigDirector_SwigClient::on_performance(libndt::NettestFlags tid, uint8_t nflows, double measured_bytes, double measurement_interval, double elapsed, double max_runtime) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -870,7 +870,7 @@ void SwigDirector_NdtClient::on_performance(uint8_t tid, uint8_t nflows, double 
     jmeasurement_interval = (jdouble) measurement_interval;
     jelapsed = (jdouble) elapsed;
     jmax_runtime = (jdouble) max_runtime;
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[3], swigjobj, jtid, jnflows, jmeasured_bytes, jmeasurement_interval, jelapsed, jmax_runtime);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[3], swigjobj, jtid, jnflows, jmeasured_bytes, jmeasurement_interval, jelapsed, jmax_runtime);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -883,7 +883,7 @@ void SwigDirector_NdtClient::on_performance(uint8_t tid, uint8_t nflows, double 
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::on_result(std::string scope, std::string name, std::string value) {
+void SwigDirector_SwigClient::on_result(std::string scope, std::string name, std::string value) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -903,7 +903,7 @@ void SwigDirector_NdtClient::on_result(std::string scope, std::string name, std:
     Swig::LocalRefGuard name_refguard(jenv, jname); 
     jvalue = jenv->NewStringUTF((&value)->c_str());
     Swig::LocalRefGuard value_refguard(jenv, jvalue); 
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[4], swigjobj, jscope, jname, jvalue);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[4], swigjobj, jscope, jname, jvalue);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -916,7 +916,7 @@ void SwigDirector_NdtClient::on_result(std::string scope, std::string name, std:
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::on_server_busy(std::string msg) {
+void SwigDirector_SwigClient::on_server_busy(std::string msg) {
   JNIEnvWrapper swigjnienv(this) ;
   JNIEnv * jenv = swigjnienv.getJNIEnv() ;
   jobject swigjobj = (jobject) NULL ;
@@ -930,7 +930,7 @@ void SwigDirector_NdtClient::on_server_busy(std::string msg) {
   if (swigjobj && jenv->IsSameObject(swigjobj, NULL) == JNI_FALSE) {
     jmsg = jenv->NewStringUTF((&msg)->c_str());
     Swig::LocalRefGuard msg_refguard(jenv, jmsg); 
-    jenv->CallStaticVoidMethod(Swig::jclass_NdtLibraryJNI, Swig::director_method_ids[5], swigjobj, jmsg);
+    jenv->CallStaticVoidMethod(Swig::jclass_LibndtJNI, Swig::director_method_ids[5], swigjobj, jmsg);
     jthrowable swigerror = jenv->ExceptionOccurred();
     if (swigerror) {
       jenv->ExceptionClear();
@@ -943,7 +943,7 @@ void SwigDirector_NdtClient::on_server_busy(std::string msg) {
   if (swigjobj) jenv->DeleteLocalRef(swigjobj);
 }
 
-void SwigDirector_NdtClient::swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global) {
+void SwigDirector_SwigClient::swig_connect_director(JNIEnv *jenv, jobject jself, jclass jcls, bool swig_mem_own, bool weak_global) {
   static struct {
     const char *mname;
     const char *mdesc;
@@ -973,7 +973,7 @@ void SwigDirector_NdtClient::swig_connect_director(JNIEnv *jenv, jobject jself, 
   
   if (swig_set_self(jenv, jself, swig_mem_own, weak_global)) {
     if (!baseclass) {
-      baseclass = jenv->FindClass("io/ooni/libndt/java/NdtClient");
+      baseclass = jenv->FindClass("io/ooni/libndt/swig/SwigClient");
       if (!baseclass) return;
       baseclass = (jclass) jenv->NewGlobalRef(baseclass);
     }
@@ -999,163 +999,163 @@ void SwigDirector_NdtClient::swig_connect_director(JNIEnv *jenv, jobject jself, 
 extern "C" {
 #endif
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_versionMajor_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_versionMajor_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Version result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::version_major;
+  result = (libndt::Version)libndt::version_major;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_versionMinor_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_versionMinor_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Version result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::version_minor;
+  result = (libndt::Version)libndt::version_minor;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_versionPatch_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_versionPatch_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Version result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::version_patch;
+  result = (libndt::Version)libndt::version_patch;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_nettestFlagUpload_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_swig_LibndtJNI_nettestFlagUpload_1get(JNIEnv *jenv, jclass jcls) {
   jshort jresult = 0 ;
-  uint8_t result;
+  libndt::NettestFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint8_t)libndt::nettest_flag_upload;
+  result = (libndt::NettestFlags)libndt::nettest_flag_upload;
   jresult = (jshort)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_nettestFlagDownload_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_swig_LibndtJNI_nettestFlagDownload_1get(JNIEnv *jenv, jclass jcls) {
   jshort jresult = 0 ;
-  uint8_t result;
+  libndt::NettestFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint8_t)libndt::nettest_flag_download;
+  result = (libndt::NettestFlags)libndt::nettest_flag_download;
   jresult = (jshort)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_nettestFlagDownloadExt_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_swig_LibndtJNI_nettestFlagDownloadExt_1get(JNIEnv *jenv, jclass jcls) {
   jshort jresult = 0 ;
-  uint8_t result;
+  libndt::NettestFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint8_t)libndt::nettest_flag_download_ext;
+  result = (libndt::NettestFlags)libndt::nettest_flag_download_ext;
   jresult = (jshort)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_verbosityQuiet_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_verbosityQuiet_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Verbosity result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::verbosity_quiet;
+  result = (libndt::Verbosity)libndt::verbosity_quiet;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_verbosityWarning_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_verbosityWarning_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Verbosity result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::verbosity_warning;
+  result = (libndt::Verbosity)libndt::verbosity_warning;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_verbosityInfo_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_verbosityInfo_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Verbosity result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::verbosity_info;
+  result = (libndt::Verbosity)libndt::verbosity_info;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_verbosityDebug_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_verbosityDebug_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::Verbosity result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::verbosity_debug;
+  result = (libndt::Verbosity)libndt::verbosity_debug;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_protocolFlagJson_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_protocolFlagJson_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::ProtocolFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::protocol_flag_json;
+  result = (libndt::ProtocolFlags)libndt::protocol_flag_json;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_protocolFlagTls_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_protocolFlagTls_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::ProtocolFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::protocol_flag_tls;
+  result = (libndt::ProtocolFlags)libndt::protocol_flag_tls;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_protocolFlagWebsockets_1get(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_protocolFlagWebsockets_1get(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  uint32_t result;
+  libndt::ProtocolFlags result;
   
   (void)jenv;
   (void)jcls;
-  result = (uint32_t)libndt::protocol_flag_websockets;
+  result = (libndt::ProtocolFlags)libndt::protocol_flag_websockets;
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1mlabnsUrl_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1mlabnsUrl_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1176,7 +1176,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1mlab
 }
 
 
-SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1mlabnsUrl_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1mlabnsUrl_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *result = 0 ;
@@ -1191,35 +1191,35 @@ SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1m
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1timeout_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1timeout_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint16_t arg2 ;
+  libndt::Timeout arg2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  arg2 = (uint16_t)jarg2; 
+  arg2 = (libndt::Timeout)jarg2; 
   if (arg1) (arg1)->timeout = arg2;
 }
 
 
-SWIGEXPORT jint JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1timeout_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
-  jint jresult = 0 ;
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1timeout_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint16_t result;
+  libndt::Timeout result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  result = (uint16_t) ((arg1)->timeout);
-  jresult = (jint)result; 
+  result = (libndt::Timeout) ((arg1)->timeout);
+  jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1hostname_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1hostname_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1240,7 +1240,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1host
 }
 
 
-SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1hostname_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1hostname_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *result = 0 ;
@@ -1255,7 +1255,7 @@ SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1h
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1port_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1port_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1276,7 +1276,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1port
 }
 
 
-SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1port_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1port_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *result = 0 ;
@@ -1291,119 +1291,119 @@ SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1p
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1nettestFlags_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1nettestFlags_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint8_t arg2 ;
+  libndt::NettestFlags arg2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  arg2 = (uint8_t)jarg2; 
+  arg2 = (libndt::NettestFlags)jarg2; 
   if (arg1) (arg1)->nettest_flags = arg2;
 }
 
 
-SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1nettestFlags_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jshort JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1nettestFlags_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jshort jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint8_t result;
+  libndt::NettestFlags result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  result = (uint8_t) ((arg1)->nettest_flags);
+  result = (libndt::NettestFlags) ((arg1)->nettest_flags);
   jresult = (jshort)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1verbosity_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1verbosity_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint32_t arg2 ;
+  libndt::Verbosity arg2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  arg2 = (uint32_t)jarg2; 
+  arg2 = (libndt::Verbosity)jarg2; 
   if (arg1) (arg1)->verbosity = arg2;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1verbosity_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1verbosity_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint32_t result;
+  libndt::Verbosity result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  result = (uint32_t) ((arg1)->verbosity);
+  result = (libndt::Verbosity) ((arg1)->verbosity);
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1protocolFlags_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1protocolFlags_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint32_t arg2 ;
+  libndt::ProtocolFlags arg2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  arg2 = (uint32_t)jarg2; 
+  arg2 = (libndt::ProtocolFlags)jarg2; 
   if (arg1) (arg1)->protocol_flags = arg2;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1protocolFlags_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1protocolFlags_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint32_t result;
+  libndt::ProtocolFlags result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  result = (uint32_t) ((arg1)->protocol_flags);
+  result = (libndt::ProtocolFlags) ((arg1)->protocol_flags);
   jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1maxRuntime_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jint jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1maxRuntime_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint16_t arg2 ;
+  libndt::Timeout arg2 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  arg2 = (uint16_t)jarg2; 
+  arg2 = (libndt::Timeout)jarg2; 
   if (arg1) (arg1)->max_runtime = arg2;
 }
 
 
-SWIGEXPORT jint JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1maxRuntime_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
-  jint jresult = 0 ;
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1maxRuntime_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+  jlong jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
-  uint16_t result;
+  libndt::Timeout result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Settings **)&jarg1; 
-  result = (uint16_t) ((arg1)->max_runtime);
-  jresult = (jint)result; 
+  result = (libndt::Timeout) ((arg1)->max_runtime);
+  jresult = (jlong)result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1socks5hPort_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1socks5hPort_1set(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1424,7 +1424,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1sock
 }
 
 
-SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1socks5hPort_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1socks5hPort_1get(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jstring jresult = 0 ;
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string *result = 0 ;
@@ -1439,7 +1439,7 @@ SWIGEXPORT jstring JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1s
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1addMetadata(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigSettings_1addMetadata(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   std::string arg2 ;
   std::string arg3 ;
@@ -1468,7 +1468,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtSettings_1addM
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_new_1NdtSettings(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_new_1SwigSettings(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   libndt::Settings *result = 0 ;
   
@@ -1480,7 +1480,7 @@ SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_new_1NdtSettings
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_delete_1NdtSettings(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_delete_1SwigSettings(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   libndt::Settings *arg1 = (libndt::Settings *) 0 ;
   
   (void)jenv;
@@ -1490,19 +1490,19 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_delete_1NdtSettin
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_new_1NdtClient_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_new_1SwigClient_1_1SWIG_10(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
   libndt::Client *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  result = (libndt::Client *)new SwigDirector_NdtClient(jenv);
+  result = (libndt::Client *)new SwigDirector_SwigClient(jenv);
   *(libndt::Client **)&jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_new_1NdtClient_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_swig_LibndtJNI_new_1SwigClient_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
   libndt::Settings arg1 ;
   libndt::Settings *argp1 ;
@@ -1517,13 +1517,13 @@ SWIGEXPORT jlong JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_new_1NdtClient_1
     return 0;
   }
   arg1 = *argp1; 
-  result = (libndt::Client *)new SwigDirector_NdtClient(jenv,arg1);
+  result = (libndt::Client *)new SwigDirector_SwigClient(jenv,arg1);
   *(libndt::Client **)&jresult = result; 
   return jresult;
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_delete_1NdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_delete_1SwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   
   (void)jenv;
@@ -1533,7 +1533,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_delete_1NdtClient
 }
 
 
-SWIGEXPORT jboolean JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1run(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
+SWIGEXPORT jboolean JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1run(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jboolean jresult = 0 ;
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   bool result;
@@ -1548,7 +1548,7 @@ SWIGEXPORT jboolean JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1ru
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onWarning(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onWarning(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1569,7 +1569,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onWarn
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onWarningSwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onWarningSwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1590,7 +1590,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onWarn
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onInfo(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onInfo(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1611,7 +1611,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onInfo
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onInfoSwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onInfoSwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1632,7 +1632,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onInfo
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onDebug(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onDebug(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1653,7 +1653,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onDebu
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onDebugSwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onDebugSwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string *arg2 = 0 ;
   
@@ -1674,9 +1674,9 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onDebu
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2, jshort jarg3, jdouble jarg4, jdouble jarg5, jdouble jarg6, jdouble jarg7) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onPerformance(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2, jshort jarg3, jdouble jarg4, jdouble jarg5, jdouble jarg6, jdouble jarg7) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
-  uint8_t arg2 ;
+  libndt::NettestFlags arg2 ;
   uint8_t arg3 ;
   double arg4 ;
   double arg5 ;
@@ -1687,7 +1687,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerf
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Client **)&jarg1; 
-  arg2 = (uint8_t)jarg2; 
+  arg2 = (libndt::NettestFlags)jarg2; 
   arg3 = (uint8_t)jarg3; 
   arg4 = (double)jarg4; 
   arg5 = (double)jarg5; 
@@ -1697,9 +1697,9 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerf
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerformanceSwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2, jshort jarg3, jdouble jarg4, jdouble jarg5, jdouble jarg6, jdouble jarg7) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onPerformanceSwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jshort jarg2, jshort jarg3, jdouble jarg4, jdouble jarg5, jdouble jarg6, jdouble jarg7) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
-  uint8_t arg2 ;
+  libndt::NettestFlags arg2 ;
   uint8_t arg3 ;
   double arg4 ;
   double arg5 ;
@@ -1710,7 +1710,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerf
   (void)jcls;
   (void)jarg1_;
   arg1 = *(libndt::Client **)&jarg1; 
-  arg2 = (uint8_t)jarg2; 
+  arg2 = (libndt::NettestFlags)jarg2; 
   arg3 = (uint8_t)jarg3; 
   arg4 = (double)jarg4; 
   arg5 = (double)jarg5; 
@@ -1720,7 +1720,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onPerf
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onResult(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3, jstring jarg4) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onResult(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3, jstring jarg4) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string arg2 ;
   std::string arg3 ;
@@ -1758,7 +1758,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onResu
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onResultSwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3, jstring jarg4) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onResultSwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2, jstring jarg3, jstring jarg4) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string arg2 ;
   std::string arg3 ;
@@ -1796,7 +1796,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onResu
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onServerBusy(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onServerBusy(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string arg2 ;
   
@@ -1816,7 +1816,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onServ
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onServerBusySwigExplicitNdtClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1onServerBusySwigExplicitSwigClient(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jstring jarg2) {
   libndt::Client *arg1 = (libndt::Client *) 0 ;
   std::string arg2 ;
   
@@ -1836,19 +1836,19 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1onServ
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1director_1connect(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jswig_mem_own, jboolean jweak_global) {
   libndt::Client *obj = *((libndt::Client **)&objarg);
   (void)jcls;
-  SwigDirector_NdtClient *director = dynamic_cast<SwigDirector_NdtClient *>(obj);
+  SwigDirector_SwigClient *director = dynamic_cast<SwigDirector_SwigClient *>(obj);
   if (director) {
     director->swig_connect_director(jenv, jself, jenv->GetObjectClass(jself), (jswig_mem_own == JNI_TRUE), (jweak_global == JNI_TRUE));
   }
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_SwigClient_1change_1ownership(JNIEnv *jenv, jclass jcls, jobject jself, jlong objarg, jboolean jtake_or_release) {
   libndt::Client *obj = *((libndt::Client **)&objarg);
-  SwigDirector_NdtClient *director = dynamic_cast<SwigDirector_NdtClient *>(obj);
+  SwigDirector_SwigClient *director = dynamic_cast<SwigDirector_SwigClient *>(obj);
   (void)jcls;
   if (director) {
     director->swig_java_change_ownership(jenv, jself, jtake_or_release ? true : false);
@@ -1856,7 +1856,7 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_NdtClient_1change
 }
 
 
-SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_swig_1module_1init(JNIEnv *jenv, jclass jcls) {
+SWIGEXPORT void JNICALL Java_io_ooni_libndt_swig_LibndtJNI_swig_1module_1init(JNIEnv *jenv, jclass jcls) {
   int i;
   
   static struct {
@@ -1864,26 +1864,26 @@ SWIGEXPORT void JNICALL Java_io_ooni_libndt_java_NdtLibraryJNI_swig_1module_1ini
     const char *signature;
   } methods[6] = {
     {
-      "SwigDirector_NdtClient_onWarning", "(Lio/ooni/libndt/java/NdtClient;Ljava/lang/String;)V" 
+      "SwigDirector_SwigClient_onWarning", "(Lio/ooni/libndt/swig/SwigClient;Ljava/lang/String;)V" 
     },
     {
-      "SwigDirector_NdtClient_onInfo", "(Lio/ooni/libndt/java/NdtClient;Ljava/lang/String;)V" 
+      "SwigDirector_SwigClient_onInfo", "(Lio/ooni/libndt/swig/SwigClient;Ljava/lang/String;)V" 
     },
     {
-      "SwigDirector_NdtClient_onDebug", "(Lio/ooni/libndt/java/NdtClient;Ljava/lang/String;)V" 
+      "SwigDirector_SwigClient_onDebug", "(Lio/ooni/libndt/swig/SwigClient;Ljava/lang/String;)V" 
     },
     {
-      "SwigDirector_NdtClient_onPerformance", "(Lio/ooni/libndt/java/NdtClient;SSDDDD)V" 
+      "SwigDirector_SwigClient_onPerformance", "(Lio/ooni/libndt/swig/SwigClient;SSDDDD)V" 
     },
     {
-      "SwigDirector_NdtClient_onResult", "(Lio/ooni/libndt/java/NdtClient;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" 
+      "SwigDirector_SwigClient_onResult", "(Lio/ooni/libndt/swig/SwigClient;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V" 
     },
     {
-      "SwigDirector_NdtClient_onServerBusy", "(Lio/ooni/libndt/java/NdtClient;Ljava/lang/String;)V" 
+      "SwigDirector_SwigClient_onServerBusy", "(Lio/ooni/libndt/swig/SwigClient;Ljava/lang/String;)V" 
     }
   };
-  Swig::jclass_NdtLibraryJNI = (jclass) jenv->NewGlobalRef(jcls);
-  if (!Swig::jclass_NdtLibraryJNI) return;
+  Swig::jclass_LibndtJNI = (jclass) jenv->NewGlobalRef(jcls);
+  if (!Swig::jclass_LibndtJNI) return;
   for (i = 0; i < (int) (sizeof(methods)/sizeof(methods[0])); ++i) {
     Swig::director_method_ids[i] = jenv->GetStaticMethodID(jcls, methods[i].method, methods[i].signature);
     if (!Swig::director_method_ids[i]) return;
